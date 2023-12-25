@@ -9,7 +9,6 @@ namespace MVC_FullProject.Controllers
     public class HomeController : Controller
     {// ILogger, loglama işlemleri için kullanılır
         private readonly ILogger<HomeController> _logger;
-
         // NorthwndContext, veritabanı işlemleri için kullanılır
         private readonly NorthwndContext _context;
 
@@ -68,6 +67,16 @@ Bu yapı, Dependency Injection prensibini kullanarak bağımlılıkları enjekte
         {
             var products = _context.Products.ToList();
             //burada var tipinde products değişkeni içersine list olarak _context teki products ları gönderiyorum.
+            if (SessionHelper.GetProductFromJson<Cart>(HttpContext.Session, "sepet") != null)
+            {
+                
+                // Sepeti oturumdan çek
+                var sepet = SessionHelper.GetProductFromJson<Cart>(HttpContext.Session, "sepet");
+
+                // Sepeti gösteren bir görünümü döndür
+                TempData["CartCount"] = sepet._myCart.Count();
+                
+            }
             return View(products);
             //burada metotun view'ına(products değerini içersindeki verilerle birlikte gönderiyorum(bu sayede index view'ında verileri listeleyebileceğim.))
         }
@@ -161,7 +170,7 @@ Bu yapı, kullanıcının bir sayfayı tarayıcıda görmesini sağlamak için t
             if (product != null)//eğer çekilen ürün null değilse
             {
                 CartItem cartItem = new CartItem();
-                cartItem.Id = product.ProductId;
+                cartItem.ProductId = product.ProductId;
                 cartItem.UnitPrice = product.UnitPrice;
                 cartItem.ProductName = product.ProductName;
                 //cartItem (sepet öğesi) oluşturulur ve bu öğe cartSession'a eklenir.
@@ -215,8 +224,9 @@ Bu yapı, kullanıcının bir sayfayı tarayıcıda görmesini sağlamak için t
                 #endregion
                 // Sepeti oturumdan çek
                 var sepet = SessionHelper.GetProductFromJson<Cart>(HttpContext.Session, "sepet");
-                
+
                 // Sepeti gösteren bir görünümü döndür
+                TempData["CartCount"] = sepet._myCart.Count();
                 return View(sepet);
             }
             else
@@ -227,21 +237,19 @@ Bu yapı, kullanıcının bir sayfayı tarayıcıda görmesini sağlamak için t
 
         }
 
-        //public IActionResult DeleteProduct(int id) 
-        //{
-        //    CartItem cartItem = new CartItem();
-        //    var product = _context.Products.FirstOrDefault(x => x.ProductId == id);
-            
-        //    cartItem.Id = product.ProductId;
-        //    cartItem.UnitPrice = product.UnitPrice;
-        //    cartItem.ProductName = product.ProductName;
+        public IActionResult DeleteProduct(int ProductId)
+        {
+            Cart cartSession;//objenin tipini veriyorum
 
-        //    if (product != null) 
-        //    {
-        //        Cart.DeleteItem(cartItem);
-        //    }
-        //    return RedirectToAction("MyCart");
-        //}
+            if (SessionHelper.GetProductFromJson<Cart>(HttpContext.Session, "sepet") != null)//eğer sepet burada null değilse
+            {
+                cartSession = SessionHelper.GetProductFromJson<Cart>(HttpContext.Session, "sepet");//sepeti cartSession'a atıyorum
+                cartSession.DeleteItem(ProductId);//parametreden aldığım ıdye göre delete methodunu çağırıyorum
+                SessionHelper.SetJsonProduct(HttpContext.Session, "sepet", cartSession); //sepet sessionunu tekrar güncellenmiş halini set ediyorum
+            }
+
+            return RedirectToAction("MyCart");//MyCart methoduna gönderiyorum.
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

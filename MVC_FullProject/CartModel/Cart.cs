@@ -21,13 +21,13 @@ Bu alışveriş sepeti örneğinde, ürün kimlikleri (int) ile CartItem nesnele
         
         public void AddItem(CartItem cartItem)
         {//Addİtem metot'u geriye değer döndürmeyen(void) koleksiyona cartıtem tipindeki objeyi eklemek için kullanılır.
-            if (_myCart.ContainsKey(cartItem.Id))
+            if (_myCart.ContainsKey(cartItem.ProductId))
             {//eğer _mycart koleksiyonu değer olarak verilen ıd ye sahip bir obje içeriyorsa if scobuna gir
-                _myCart[cartItem.Id].Quantity += 1; //ve bu ıd ye sahip objenin quantity değerini bir arttır
+                _myCart[cartItem.ProductId].Quantity += 1; //ve bu ıd ye sahip objenin quantity değerini bir arttır
                 return;//scoptan çık if ten sonrasına bakma.
 
             }//eğer içermiyorsa 
-            _myCart.Add(cartItem.Id, cartItem);//_mycart koleksiyonuna add yani ekle değer olarak verilen obkenin ıd sini ve objenin kendisini.
+            _myCart.Add(cartItem.ProductId, cartItem);//_mycart koleksiyonuna add yani ekle değer olarak verilen obkenin ıd sini ve objenin kendisini.
         }
 
         //ödev: repository olarak devam et (generic ripository?)
@@ -36,14 +36,20 @@ Bu alışveriş sepeti örneğinde, ürün kimlikleri (int) ile CartItem nesnele
         public void UpdateItem(int quantity ,CartItem cartItem)
         {
            
-                _myCart[cartItem.Id].Quantity = quantity;
+                _myCart[cartItem.ProductId].Quantity = quantity;
            
         }
 
         //Delete Item
         public void DeleteItem(CartItem cartItem) 
         {
-            _myCart.Remove(cartItem.Id);
+            _myCart.Remove(cartItem.ProductId);
+        }
+
+        //Delete Item
+        public void DeleteItem(int productId)
+        {
+            _myCart.Remove(productId);
         }
     }
 }
