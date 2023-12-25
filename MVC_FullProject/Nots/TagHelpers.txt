@@ -1,0 +1,16 @@
+﻿asp-action, asp-controller, ve asp-route-id gibi ifadeler, ASP.NET Core MVC (Model-View-Controller) framework'ü içinde kullanılan tag helper'ları temsil eder. Bu tag helper'ları, HTML etiketlerine özel özellikler ekleyerek ve C# kodunu içeriye gömerek, ASP.NET Core MVC uygulamalarında daha temiz, okunabilir ve güçlü bir HTML oluşturmayı sağlar.
+
+Verdiğiniz örnekte kullanılan tag helper'lar şu şekilde açıklanabilir:
+
+asp-action: Bu, bir HTML etiketini bir Controller aksiyonuyla ilişkilendirmek için kullanılır. Örnekte, <a> (bağlantı) etiketi, AddToCart adlı aksiyonu çağıran bir bağlantıyı temsil eder.
+
+asp-controller: Bu, bir HTML etiketini bir Controller ile ilişkilendirmek için kullanılır. Örnekte, bağlantı etiketi Home adlı Controller'ı hedef alır.
+
+asp-route-id: Bu, bir route (yol) parametresini belirtir ve bu parametreyi bir değerle doldurur. Örnekte, @item.ProductId ifadesi, asp-route-id ile belirtilen id parametresine bu ürünün ProductId değerini doldurur.
+
+Bu tag helper'lar, ASP.NET Core MVC'nin güçlü bir özelliği olan URL oluşturma ve Controller aksiyonlarına yönlendirme gibi işlemleri kolaylaştırmak için kullanılır. Tag helper'lar, HTML kodunu daha düzenli hale getirirken aynı zamanda güvenli URL oluşturmayı sağlar.
+
+
+
+
+

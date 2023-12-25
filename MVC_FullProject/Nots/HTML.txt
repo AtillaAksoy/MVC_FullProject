@@ -1,0 +1,9 @@
+﻿HTML'deki <table> etiketi bir tabloyu tanımlar ve bu tabloyu oluşturan elementlerin özelliklerini belirler. <table> etiketi içindeki class özelliği, CSS (Cascading Style Sheets) ile belirli bir stile sahip olan tabloyu tanımlamak için kullanılır.
+
+Burada verdiğiniz örnekte, class="table table-hover" ifadesi iki farklı CSS sınıfını tabloya uygular. Bu sınıflar genellikle bir CSS framework'ü olan Bootstrap tarafından kullanılır, ancak kendi tasarladığınız veya başka bir framework'ten aldığınız CSS kurallarını da içerebilir.
+
+table Sınıfı: Bu sınıf, genellikle bir tablonun temel stilini belirtir. Tablonun kenarlıkları, hücre içeriği gibi genel özellikleri içerebilir.
+
+table-hover Sınıfı: Bu sınıf, bir tablo hücresinin üzerine gelindiğinde (hover durumunda) uygulanacak ekstra stil özelliklerini belirtir. Bu, genellikle kullanıcının fareyi bir hücre üzerine getirdiğinde o hücrenin arka plan rengini değiştirme gibi interaktif bir görsel geri bildirim sağlamak için kullanılır.
+
+Örneğin, Bootstrap kullanıyorsanız, bu sınıflar genellikle tabloyu daha şık ve kullanıcı dostu hale getirmek için kullanılır. Ancak, bu sınıfların tam olarak nasıl tasarlandığı, tasarım sistemine bağlı olarak değişebilir.

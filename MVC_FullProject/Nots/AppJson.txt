@@ -1,0 +1,39 @@
+﻿Nedir ?
+JSON konfigürasyonu, ASP.NET Core uygulamasının appsettings.json dosyasında yer alan bir bağlantı dizesini temsil eder. DefaultConnection adlı bağlantı dizesi, bir SQL Server veritabanına bağlanmak için kullanılır. Aşağıda bu yapıyı daha ayrıntılı bir şekilde açıklıyorum:
+
+json
+Copy code
+"ConnectionStrings": {
+   "DefaultConnection": "server=localhost\\SQLEXPRESS;database=NORTHWND;Trusted_Connection=True;TrustServerCertificate=True"
+}
+"ConnectionStrings": Bu, bağlantı dizelerini içeren bir bölümü temsil eder. Bu bölüm, genellikle uygulamanın farklı ortamlarda (örneğin, geliştirme, test, üretim) farklı veritabanlarına bağlanmasını sağlamak için kullanılır.
+
+"DefaultConnection": Bu, belirli bir bağlantı dizesini temsil eden bir anahtardır. DefaultConnection adı genellikle, uygulamanın varsayılan veritabanı bağlantısını belirtmek için kullanılır.
+
+Bağlantı Dizesi: "server=localhost\\SQLEXPRESS;database=NORTHWND;Trusted_Connection=True;TrustServerCertificate=True" kısmı, SQL Server veritabanına bağlanmak için kullanılacak bağlantı dizesini temsil eder. Şu özelliklere sahiptir:
+
+server=localhost\\SQLEXPRESS: SQL Server sunucusunun adresi ve özellikle kullanılan örnek adıdır.
+database=NORTHWND: Bağlanılan veritabanının adıdır.
+Trusted_Connection=True: Windows kimlik doğrulama (Trusted Connection) kullanılarak yapılan bir bağlantıyı ifade eder.
+TrustServerCertificate=True: Sunucunun sertifikasının güvenilir olduğunu belirtir.
+Bu yapı, uygulamanın veritabanına bağlanması için gerekli bağlantı dizesini içerir. Bu bağlantı dizesi, uygulama kodu içinde veya yapılandırma dosyalarında bu bağlantıya erişmek istediğinizde kullanılır. Örneğin, appsettings.json içinde tanımlanan bu bağlantı dizesi, Entity Framework Core için DbContext konfigürasyonunda veya başka bir veritabanı erişimi noktasında kullanılabilir.
+
+Yararları?
+"ConnectionStrings" bölümü, bir ASP.NET Core uygulamasının veritabanına bağlanmak için kullanacağı bağlantı dizesini içerir. Bu yapı, uygulamanın farklı ortamlarda (development, testing, production vb.) farklı veritabanlarına bağlanabilmesini ve bu bağlantı dizesini tek bir merkezi konumdan yönetebilmesini sağlar. İşte bu yapıya sahip olmanın bazı avantajları:
+
+Ortam Bağımsızlığı:
+
+Farklı ortamlarda (örneğin, geliştirme, test, üretim) farklı veritabanlarına bağlanmak gerekebilir. Bu durumda, her ortam için ayrı bir bağlantı dizesi tanımlamak, kodu her ortama uygun şekilde yapılandırmak daha esnek ve hata yapma olasılığını azaltır.
+Güvenli Yönetim:
+
+Veritabanı bağlantı dizesi genellikle kullanıcı adı, şifre veya diğer güvenlik bilgilerini içerir. Bu bilgilerin kod içine gömülmesi, güvenlik riskleri oluşturabilir. Bağlantı dizesini yapılandırma dosyalarına taşımak, bu hassas bilgileri daha güvenli bir şekilde yönetmenizi sağlar.
+Merkezi Yönetim:
+
+Bağlantı dizesini appsettings.json veya başka bir yapılandırma dosyasında tutmak, uygulama yapılandırmasını daha merkezi bir şekilde yönetmenizi sağlar. Bu sayede, bağlantı dizesinde değişiklik yapılması durumunda sadece yapılandırma dosyasını güncellemeniz yeterlidir.
+Değişikliklerin Kolay Yapılması:
+
+Bağlantı dizesini tek bir yerden yönetmek, bağlantı dizesinde yapılacak değişikliklerin kolayca takip edilmesini ve yönetilmesini sağlar. Değişikliklerin uygulamanın her yerine dağılması gerekmez.
+Dependency Injection ile Kolay Kullanım:
+
+Bağlantı dizesini appsettings.json içinde tanımlamak, ASP.NET Core Dependency Injection mekanizmasını kullanarak bu bağlantı dizesine erişimi kolaylaştırır. Controller, servis veya başka bileşenlerde bu bağlantı dizesini constructor parametresi olarak alabilirsiniz.
+Özetle, "ConnectionStrings" bölümü, uygulamanın veritabanına bağlanması için gereken bağlantı dizesini daha esnek, güvenli ve merkezi bir şekilde yönetmenizi sağlar.

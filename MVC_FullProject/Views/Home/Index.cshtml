@@ -1,0 +1,29 @@
+﻿@model List<MVC_FullProject.Models.Product>
+@*burada model içersine HomeControllerdaki Index issimli metotda view a parametre olarak gönderdiğim veriyi çekebilmek için verinin tipini ve yolunu belirttim bunu daha kısa bir şekilde kullanmak için _ViewImport.cshtml'e @using ve yolu ekleyebilirdim.*@
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@*classlar gibi ek özellik olarak belirtilenler css bootstrap kütüphanesi ile birlikte kullanımımıza sunulan kısa yollar detaylı açıklama için bknz:~/Nots/Html.txt*@
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Product Name</th>
+            <th>UnitPrice</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ProductName</td>
+                <td>@item.UnitPrice</td>
+                <td> @*burada kullanılan tag helpers (asp-...) etiketlerini incelemek için bknz:~/Nots/TagHelpers.txt*@
+                    <a asp-action="AddToCart" asp-controller="Home" asp-route-id="@item.ProductId" class="btn btn-primary">Sepete Ekle</a>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

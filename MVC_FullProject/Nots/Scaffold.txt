@@ -1,0 +1,16 @@
+﻿Scaffold-DbContext komutu, Entity Framework Core ile veritabanından kod üretmek için kullanılır. Bu komut, var olan bir veritabanının tablolarını ve ilişkilerini temsil eden C# sınıflarını oluşturmanıza yardımcı olur. Örneğin, SQL Server veritabanındaki bir NORTHWND veritabanı üzerinde çalışacak bir DbContext ve sınıf modeli oluşturmak için aşağıdaki komutu kullanabilirsiniz:
+
+bash
+Copy code
+Scaffold-DbContext "server=localhost\SQLEXPRESS;database=NORTHWND;Trusted_Connection=True;TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer -o Models
+Bu komutun ayrıntıları şu şekildedir:
+
+Scaffold-DbContext: Bu, Entity Framework Core komut satırı aracının bir komutudur ve veritabanından C# sınıfları oluşturmak için kullanılır.
+
+"server=localhost\SQLEXPRESS;database=NORTHWND;Trusted_Connection=True;TrustServerCertificate=True;": Bu, SQL Server veritabanına bağlanmak için kullanılacak bağlantı dizesidir. Bu örnekte, yerel bir SQL Server Express örneğine ve NORTHWND adlı bir veritabanına bağlanıyoruz. Bağlantı dizesi sizin kullanımınıza ve ortamınıza bağlı olarak değişecektir.
+
+Microsoft.EntityFrameworkCore.SqlServer: Bu, kullanılacak veritabanı sağlayıcısını belirtir. Bu örnekte, SQL Server sağlayıcısını kullanıyoruz.
+
+-o Models: Bu, oluşturulan sınıfların (DbContext ve diğer modeller) yerleştirileceği dizini belirtir. Bu örnekte, sınıflar Models dizini içine oluşturulacaktır.
+
+Bu komut çalıştırıldığında, belirtilen veritabanındaki tablolara karşılık gelen sınıflar ve DbContext oluşturulacaktır. Oluşturulan sınıflar, veritabanındaki tabloların şemalarını ve ilişkilerini yansıtar. Bu şekilde, veritabanı şemasındaki değişikliklere uyum sağlamak için manuel olarak sınıfları güncellemeniz gerekmez.

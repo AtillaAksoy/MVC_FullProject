@@ -1,0 +1,60 @@
+﻿@model MVC_FullProject.CartModel.Cart
+@{
+    ViewData["Title"] = "MyCart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    decimal? totalPrice = 0;
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-9">
+         <div class="card">
+             <div class="card-body">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Product Name</th>
+                                <th>UnitPrice</th>
+                                <th>Quantity</th>
+                                <th>SubTotal</th>
+                                <th>
+                                  
+                                </th>
+                                <th>
+                                   
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model._myCart.Values)
+                            {
+                                totalPrice += item.Subtotal;
+                                <tr>
+                                    <td>@item.ProductName</td>
+                                    <td>@item.UnitPrice</td>
+                                    <td>@item.Quantity</td>
+                                    <td>@item.Subtotal</td>
+                                    <td>
+                                        <input type="number" class="form-control" value="@item.Quantity" />
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-sm btn-warning">Gücelle</button>
+                                         <a asp-action="DeleteProduct" asp-controller="Home" asp-route-id="@item.Id" class="btn btn-sm btn-danger"> Kaldır</a>
+
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+             </div>
+         </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h1>Toplam Tutar: @totalPrice TL</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
